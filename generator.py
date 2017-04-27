@@ -44,9 +44,17 @@ def randRGB():
 def cha_draw(cha, text_color, font, rotate,size_cha):
     im = Image.new(mode='RGBA', size=(size_cha*2, size_cha*2))
     drawer = ImageDraw.Draw(im) 
-    drawer.text(xy=(0, 0), text=cha, fill=text_color, font=font) #text 内容，fill 颜色， font 字体（包括大小）
+    drawer.text(xy=(-1, -1), text=cha, fill=text_color, font=font) #text 内容，fill 颜色， font 字体（包括大小）
+    drawer.text(xy=(1, -1), text=cha, fill=text_color, font=font)
+    drawer.text(xy=(-1, -1), text=cha, fill=text_color, font=font)
+    drawer.text(xy=(-1, 1), text=cha, fill=text_color, font=font)
+    drawer.text(xy=(-1, 0), text=cha, fill=text_color, font=font)
+    drawer.text(xy=(1, 0), text=cha, fill=text_color, font=font)
+    drawer.text(xy=(0, -1), text=cha, fill=text_color, font=font)
+    drawer.text(xy=(0, 1), text=cha, fill=text_color, font=font)
+    drawer.text(xy=(0, 0), text=cha, fill=(255, 255, 255), font=font)
     if rotate:
-        max_angle = 45 # to be tuned
+        max_angle = 20 # to be tuned
         angle = random.randint(-max_angle, max_angle)
         im = im.rotate(angle, Image.BILINEAR, expand=1)
     im = im.crop(im.getbbox())
@@ -69,9 +77,7 @@ def captcha_draw(size_im, nb_cha, set_cha, fonts=None, overlap=0.1,
     width_cha = int(width_im / max(nb_cha-overlap, 1)) # 字符区域宽度
     height_cha = height_im # 字符区域高度
     bg_color = 'white'
-    text_color = 'black'
-    derx = 0
-    dery = 0
+    text_color = random.choice([(254, 101, 101), (101, 101, 254)])
 
     if rd_text_size:
         rate_cha = random.uniform(rate_cha-0.1, rate_cha+0.1) # to be tuned
@@ -79,26 +85,29 @@ def captcha_draw(size_im, nb_cha, set_cha, fonts=None, overlap=0.1,
     
     #if rd_bg_color:
         #bg_color = randRGB()
-    bg_color = (random.randint(198, 203), random.randint(198, 203), random.randint(198, 203))
+    bg_color = (255, 255, 255)
     im = Image.new(mode='RGB', size=size_im, color=bg_color) # color 背景颜色，size 图片大小
 
     drawer = ImageDraw.Draw(im)
     contents = []
+    derx = random.randint(0, max(width_cha-size_cha-5, 0))
+    dery = 0
     for i in range(nb_cha):
-        if rd_text_color:
-            text_color = randRGB()
         if rd_text_pos:
-            derx = random.randint(0, max(width_cha-size_cha-5, 0))
+            #derx += random.randint(0, max(width_cha-size_cha-5, 0))
             dery = random.randint(0, max(height_cha-size_cha-5, 0))
 
         # font = ImageFont.truetype("arial.ttf", size_cha)
         cha = random.choice(set_cha)
         font = ImageFont.truetype(fonts['eng'], size_cha)
         contents.append(cha) 
-        im_cha = cha_draw(cha, text_color, font, rotate, size_cha)
+        char_size = int((0.01 * random.randint(0, 20) + 1) * size_cha)
+        im_cha = cha_draw(cha, text_color, font, rotate, char_size)
+        derx += random.randint(0, 5)
         im.paste(im_cha, 
-                 (int(max(i-overlap, 0)*width_cha)+derx+random.randint(0, 10), dery++random.randint(0, 10)), 
+                 (derx, dery++random.randint(0, 5)), 
                  im_cha) # 字符左上角位置
+        derx += size_cha / 2
         
     if 'point' in noise:
         nb_point = 30
@@ -109,13 +118,12 @@ def captcha_draw(size_im, nb_cha, set_cha, fonts=None, overlap=0.1,
             drawer.point(xy=(x, y), fill=color_point)
     if 'sin' in noise:
         img = np.asarray(im)
-        color_sine = randRGB()
         x = np.arange(0, width_im)
         y = sin(x, height_im)
         for k in range(4):
             for i, j in zip(x, y+k):
                 if j >= 0 and j < height_im and all(img[j, i]==bg_color):
-                    drawer.point(xy=(i, j), fill=color_sine)
+                    drawer.point(xy=(i, j), fill=text_color)
     if 'line' in noise:
         nb_line = 10
         for i in range(nb_line):
@@ -143,14 +151,12 @@ def captcha_generator(width,
                       set_cha=chars
                       ):
     size_im = (width, height)
-    overlaps = [0.0, 0.3, 0.6]
     rd_text_poss = [True, True]
     rd_text_sizes = [True, True]
     rd_text_colors = [True, True] # false 代表字体颜色全一致，但都是黑色
     rd_bg_color = True 
-    noises = [['line', 'point', 'sin']]
+    noises = [['sin']]
     rotates = [True, True]
-    nb_chas = [4, 6]
     font_dir = 'fonts/english'
     font_paths = []
     for dirpath, dirnames, filenames in os.walk(font_dir):
@@ -164,13 +170,13 @@ def captcha_generator(width,
     y = [np.zeros((batch_size, n_class), dtype=np.uint8) for i in range(n_len)]    
     while True:
         for i in range(batch_size):
-            overlap = random.choice(overlaps)
+            overlap = 0
             rd_text_pos = random.choice(rd_text_poss)
             rd_text_size = random.choice(rd_text_sizes)
             rd_text_color = random.choice(rd_text_colors)
             noise = random.choice(noises)
             rotate = random.choice(rotates)
-            nb_cha = 6
+            nb_cha = 5
             font_path = random.choice(font_paths)
             dir_name = 'all'
             dir_path = 'img_data/'+dir_name+'/'
@@ -184,59 +190,11 @@ def captcha_generator(width,
                 y[j][i, :] = 0
                 y[j][i, set_cha.find(ch)] = 1
         yield X, y
-
-def captcha_generator_v3(width, 
-                      height, 
-                      batch_size=32,
-                      set_cha="ABCDEFGHIJKLMNOPQRSTUVWXYZabdefghijlmnqrtuwxy1234567890"
-                      ):
-    size_im = (width, height)
-    overlaps = [0.0, 0.3, 0.6]
-    rd_text_poss = [True, True]
-    rd_text_sizes = [True, True]
-    rd_text_colors = [True, True] # false 代表字体颜色全一致，但都是黑色
-    rd_bg_color = True 
-    noises = [['line', 'point', 'sin']]
-    rotates = [True, True]
-    nb_chas = [4, 6]
-    font_dir = 'fonts/english'
-    font_paths = []
-    for dirpath, dirnames, filenames in os.walk(font_dir):
-        for filename in filenames:
-            filepath = dirpath + os.sep + filename
-            font_paths.append({'eng':filepath})
-            
-    n_len = 6
-    n_class = len(set_cha)
-    X = np.zeros((batch_size, height, width, 3), dtype=np.uint8)
-    y = np.zeros((batch_size, n_len, n_class), dtype=np.uint8)   
-    while True:
-        for i in range(batch_size):
-            overlap = random.choice(overlaps)
-            rd_text_pos = random.choice(rd_text_poss)
-            rd_text_size = random.choice(rd_text_sizes)
-            rd_text_color = random.choice(rd_text_colors)
-            noise = random.choice(noises)
-            rotate = random.choice(rotates)
-            nb_cha = 6
-            font_path = random.choice(font_paths)
-            dir_name = 'all'
-            dir_path = 'img_data/'+dir_name+'/'
-            im, contents = captcha_draw(size_im=size_im, nb_cha=nb_cha, set_cha=set_cha, 
-                                        overlap=overlap, rd_text_pos=rd_text_pos, rd_text_size=False, 
-                                        rd_text_color=rd_text_color, rd_bg_color=rd_bg_color, noise=noise, 
-                                        rotate=rotate, dir_path=dir_path, fonts=font_path)
-            contents = ''.join(contents)
-            X[i] = im
-            for j, ch in enumerate(contents):
-                y[i][:, :] = 0
-                y[i][j, set_cha.find(ch)] = 1
-        yield X, y   
         
 #----------------------------------------------------------------------
 def captcha_save():
     """"""
-    a = captcha_generator(140, 44)
+    a = captcha_generator(100, 40)
     dir_path = 'img_data/all/'
     X, y = a.next()
     for x in X:
@@ -258,7 +216,5 @@ def captcha_save():
         img.save(img_path)            
 
 if __name__ == "__main__":
-    # test()
-    #captcha_generator(140, 44)
     for _ in range(100):
         captcha_save()
