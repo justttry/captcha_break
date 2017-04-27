@@ -8,7 +8,7 @@ from keras.models import *
 from keras.layers import *
 
 chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabdefghijlmnqrtuwxy"
-width, height, n_len, n_class = 140, 44, 5, len(chars)
+width, height, n_len, n_class = 100, 40, 5, len(chars)
 
 input_tensor = Input((height, width, 3))
 x = input_tensor
@@ -32,8 +32,8 @@ model.compile(loss='categorical_crossentropy',
 model.fit_generator(gen(width=width, height=height), steps_per_epoch=2000, epochs=10, 
                     validation_data=gen(width=width, height=height), validation_steps=500)
 
-model.save('mycnn_v201704271006_v1_adadelta.h5')
-print 'saved mycnn_v201704271006_v1_adadelta.h5'
+model.save('mycnn_v201704271310_v1_adadelta.h5')
+print 'saved mycnn_v201704271310_v1_adadelta.h5'
 
 from tqdm import tqdm
 def evaluate(model, batch_num=20):

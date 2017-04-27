@@ -8,7 +8,7 @@ from keras.models import *
 from keras.layers import *
 
 chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabdefghijlmnqrtuwxy"
-width, height, n_len, n_class = 140, 44, 6, len(chars)
+width, height, n_len, n_class = 100, 40, 6, len(chars)
 
 input_tensor = Input((height, width, 3))
 x = input_tensor
