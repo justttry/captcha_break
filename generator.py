@@ -122,8 +122,7 @@ def captcha_draw(size_im, nb_cha, set_cha, fonts=None, overlap=0.1,
         y = sin(x, height_im)
         for k in range(4):
             for i, j in zip(x, y+k):
-                if j >= 0 and j < height_im and all(img[j, i]==bg_color):
-                    drawer.point(xy=(i, j), fill=text_color)
+                drawer.point(xy=(i, j), fill=text_color)
     if 'line' in noise:
         nb_line = 10
         for i in range(nb_line):
