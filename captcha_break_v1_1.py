@@ -33,7 +33,7 @@ tbCallBack = callbacks.TensorBoard(log_dir='./graph',
                                    write_graph=True, 
                                    write_images=True)
 
-model.fit_generator(gen(width=width, height=height), steps_per_epoch=2000, epochs=70, 
+model.fit_generator(gen(width=width, height=height), steps_per_epoch=2000, epochs=10, 
                     validation_data=gen(width=width, height=height), validation_steps=500,
                     callbacks=[tbCallBack])
 
