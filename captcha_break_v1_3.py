@@ -2,7 +2,7 @@ import cv2
 import os
 import numpy as np
 import random
-from generator import captcha_generator as gen
+from generator_v3 import captcha_generator as gen
 
 from keras.models import *
 from keras.layers import *
