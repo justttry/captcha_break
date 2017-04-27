@@ -164,7 +164,7 @@ def captcha_generator(width,
             filepath = dirpath + os.sep + filename
             font_paths.append({'eng':filepath})
             
-    n_len = 6
+    n_len = 5
     n_class = len(set_cha)
     X = np.zeros((batch_size, height, width, 3), dtype=np.uint8)
     y = [np.zeros((batch_size, n_class), dtype=np.uint8) for i in range(n_len)]    
