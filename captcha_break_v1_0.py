@@ -8,7 +8,7 @@ from keras.models import *
 from keras.layers import *
 
 chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabdefghijlmnqrtuwxy"
-width, height, n_len, n_class = 100, 40, 6, len(chars)
+width, height, n_len, n_class = 100, 40, 5, len(chars)
 
 input_tensor = Input((height, width, 3))
 x = input_tensor
@@ -20,7 +20,7 @@ for i in range(3):
 x = Flatten()(x)
 x = Dense(512, activation='relu')(x)
 x = Dropout(0.25)(x)
-x = [Dense(n_class, activation='softmax', name='c%d'%(i+1))(x) for i in range(6)]
+x = [Dense(n_class, activation='softmax', name='c%d'%(i+1))(x) for i in range(5)]
 model = Model(input=input_tensor, outputs=x)
 
 model.compile(loss='categorical_crossentropy',
@@ -29,7 +29,7 @@ model.compile(loss='categorical_crossentropy',
 
 
 
-model.fit_generator(gen(width=width, height=height), steps_per_epoch=2000, epochs=20, 
+model.fit_generator(gen(width=width, height=height), steps_per_epoch=2000, epochs=10, 
                     validation_data=gen(width=width, height=height), validation_steps=500)
 
 model.save('mycnn_v201704271006_v1_adadelta.h5')
