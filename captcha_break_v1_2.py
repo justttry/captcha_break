@@ -37,8 +37,8 @@ model.fit_generator(gen(width=width, height=height), steps_per_epoch=2000, epoch
                     validation_data=gen(width=width, height=height), validation_steps=500,
                     callbacks=[tbCallBack])
 
-model.save('mycnn_v201704271310_v1_adadelta.h5')
-print 'saved mycnn_v201704271310_v1_adadelta.h5'
+model.save('mycnn_v201704271818_v2_adadelta.h5')
+print 'saved mycnn_v201704271818_v2_adadelta.h5'
 
 from tqdm import tqdm
 def evaluate(model, batch_num=20):
