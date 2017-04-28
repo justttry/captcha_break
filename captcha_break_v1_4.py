@@ -6,6 +6,7 @@ from generator_v3 import captcha_generator as gen
 
 from keras.models import *
 from keras.layers import *
+from keras import callbacks
 
 chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabdefghijlmnqrtuwxy"
 width, height, n_len, n_class = 100, 40, 6, len(chars)
