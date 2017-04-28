@@ -33,12 +33,12 @@ tbCallBack = callbacks.TensorBoard(log_dir='./graph',
                                    write_graph=True, 
                                    write_images=True)
 
-model.fit_generator(gen(width=width, height=height), steps_per_epoch=2000, epochs=10, 
+model.fit_generator(gen(width=width, height=height), steps_per_epoch=3000, epochs=10, 
                     validation_data=gen(width=width, height=height), validation_steps=500,
                     callbacks=[tbCallBack])
 
-model.save('mycnn_v201704281209_v5_adadelta.h5')
-print 'saved mycnn_v201704281209_v5_adadelta.h5'
+model.save('mycnn_v201704281809_v5_adadelta.h5')
+print 'saved mycnn_v201704281809_v5_adadelta.h5'
 
 from tqdm import tqdm
 def evaluate(model, batch_num=20):
