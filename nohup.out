@@ -15,3 +15,88 @@ I tensorflow/stream_executor/dso_loader.cc:135] successfully opened CUDA library
 I tensorflow/stream_executor/dso_loader.cc:135] successfully opened CUDA library libcufft.so.8.0 locally
 I tensorflow/stream_executor/dso_loader.cc:135] successfully opened CUDA library libcuda.so.1 locally
 I tensorflow/stream_executor/dso_loader.cc:135] successfully opened CUDA library libcurand.so.8.0 locally
+I tensorflow/stream_executor/dso_loader.cc:135] successfully opened CUDA library libcublas.so.8.0 locally
+I tensorflow/stream_executor/dso_loader.cc:135] successfully opened CUDA library libcudnn.so.5 locally
+I tensorflow/stream_executor/dso_loader.cc:135] successfully opened CUDA library libcufft.so.8.0 locally
+I tensorflow/stream_executor/dso_loader.cc:135] successfully opened CUDA library libcuda.so.1 locally
+I tensorflow/stream_executor/dso_loader.cc:135] successfully opened CUDA library libcurand.so.8.0 locally
+Traceback (most recent call last):
+  File "/home/ubuntu/anaconda2/lib/python2.7/SocketServer.py", line 596, in process_request_thread
+    self.finish_request(request, client_address)
+  File "/home/ubuntu/anaconda2/lib/python2.7/SocketServer.py", line 331, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/home/ubuntu/anaconda2/lib/python2.7/site-packages/tensorflow/tensorboard/backend/handler.py", line 102, in __init__
+    BaseHTTPServer.BaseHTTPRequestHandler.__init__(self, *args)
+  File "/home/ubuntu/anaconda2/lib/python2.7/SocketServer.py", line 652, in __init__
+    self.handle()
+  File "/home/ubuntu/anaconda2/lib/python2.7/BaseHTTPServer.py", line 342, in handle
+    self.handle_one_request()
+  File "/home/ubuntu/anaconda2/lib/python2.7/BaseHTTPServer.py", line 310, in handle_one_request
+    self.raw_requestline = self.rfile.readline(65537)
+  File "/home/ubuntu/anaconda2/lib/python2.7/socket.py", line 480, in readline
+    data = self._sock.recv(self._rbufsize)
+error: [Errno 110] Connection timed out
+Traceback (most recent call last):
+  File "/home/ubuntu/anaconda2/lib/python2.7/SocketServer.py", line 596, in process_request_thread
+    self.finish_request(request, client_address)
+  File "/home/ubuntu/anaconda2/lib/python2.7/SocketServer.py", line 331, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/home/ubuntu/anaconda2/lib/python2.7/site-packages/tensorflow/tensorboard/backend/handler.py", line 102, in __init__
+    BaseHTTPServer.BaseHTTPRequestHandler.__init__(self, *args)
+  File "/home/ubuntu/anaconda2/lib/python2.7/SocketServer.py", line 652, in __init__
+    self.handle()
+  File "/home/ubuntu/anaconda2/lib/python2.7/BaseHTTPServer.py", line 342, in handle
+    self.handle_one_request()
+  File "/home/ubuntu/anaconda2/lib/python2.7/BaseHTTPServer.py", line 310, in handle_one_request
+    self.raw_requestline = self.rfile.readline(65537)
+  File "/home/ubuntu/anaconda2/lib/python2.7/socket.py", line 480, in readline
+    data = self._sock.recv(self._rbufsize)
+error: [Errno 110] Connection timed out
+Traceback (most recent call last):
+  File "/home/ubuntu/anaconda2/lib/python2.7/SocketServer.py", line 596, in process_request_thread
+    self.finish_request(request, client_address)
+  File "/home/ubuntu/anaconda2/lib/python2.7/SocketServer.py", line 331, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/home/ubuntu/anaconda2/lib/python2.7/site-packages/tensorflow/tensorboard/backend/handler.py", line 102, in __init__
+    BaseHTTPServer.BaseHTTPRequestHandler.__init__(self, *args)
+  File "/home/ubuntu/anaconda2/lib/python2.7/SocketServer.py", line 652, in __init__
+    self.handle()
+  File "/home/ubuntu/anaconda2/lib/python2.7/BaseHTTPServer.py", line 342, in handle
+    self.handle_one_request()
+  File "/home/ubuntu/anaconda2/lib/python2.7/BaseHTTPServer.py", line 310, in handle_one_request
+    self.raw_requestline = self.rfile.readline(65537)
+  File "/home/ubuntu/anaconda2/lib/python2.7/socket.py", line 480, in readline
+    data = self._sock.recv(self._rbufsize)
+error: [Errno 110] Connection timed out
+Traceback (most recent call last):
+  File "/home/ubuntu/anaconda2/lib/python2.7/SocketServer.py", line 596, in process_request_thread
+    self.finish_request(request, client_address)
+  File "/home/ubuntu/anaconda2/lib/python2.7/SocketServer.py", line 331, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/home/ubuntu/anaconda2/lib/python2.7/site-packages/tensorflow/tensorboard/backend/handler.py", line 102, in __init__
+    BaseHTTPServer.BaseHTTPRequestHandler.__init__(self, *args)
+  File "/home/ubuntu/anaconda2/lib/python2.7/SocketServer.py", line 652, in __init__
+    self.handle()
+  File "/home/ubuntu/anaconda2/lib/python2.7/BaseHTTPServer.py", line 342, in handle
+    self.handle_one_request()
+  File "/home/ubuntu/anaconda2/lib/python2.7/BaseHTTPServer.py", line 310, in handle_one_request
+    self.raw_requestline = self.rfile.readline(65537)
+  File "/home/ubuntu/anaconda2/lib/python2.7/socket.py", line 480, in readline
+    data = self._sock.recv(self._rbufsize)
+error: [Errno 110] Connection timed out
+Traceback (most recent call last):
+  File "/home/ubuntu/anaconda2/lib/python2.7/SocketServer.py", line 596, in process_request_thread
+    self.finish_request(request, client_address)
+  File "/home/ubuntu/anaconda2/lib/python2.7/SocketServer.py", line 331, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/home/ubuntu/anaconda2/lib/python2.7/site-packages/tensorflow/tensorboard/backend/handler.py", line 102, in __init__
+    BaseHTTPServer.BaseHTTPRequestHandler.__init__(self, *args)
+  File "/home/ubuntu/anaconda2/lib/python2.7/SocketServer.py", line 652, in __init__
+    self.handle()
+  File "/home/ubuntu/anaconda2/lib/python2.7/BaseHTTPServer.py", line 342, in handle
+    self.handle_one_request()
+  File "/home/ubuntu/anaconda2/lib/python2.7/BaseHTTPServer.py", line 310, in handle_one_request
+    self.raw_requestline = self.rfile.readline(65537)
+  File "/home/ubuntu/anaconda2/lib/python2.7/socket.py", line 480, in readline
+    data = self._sock.recv(self._rbufsize)
+error: [Errno 110] Connection timed out
